@@ -17,3 +17,9 @@
     <%= form.submit %>
   </p>
 <% end %>
+
+<%= form_with scope: :article, url: articles_path, local: true do |form| %>
+  ...
+<% end %>
+ 
+<%= link_to 'Back', articles_path %>
