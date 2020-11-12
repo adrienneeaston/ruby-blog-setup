@@ -4,15 +4,20 @@
 
   <div class="form-group">
     <%= f.label :timezone %><br>
-    <% debugger %>
     <%= f.time_zone_select(:timezone, ActiveSupport::TimeZone.us_zones, {default: 'Eastern Time (US & Canada)'}) %>
   </div>
 <% end %>
 
 <%= form_for(@event) do |f| %>
-
   <div class="form-group">
     <%= f.label :timezone %><br>
-    <%= f.time_zone_select(:timezone, ActiveSupport::TimeZone.us_zones, { |p| [ p.name.upcase, p.id ] } {default: 'Eastern Time (US & Canada)'}) %>
+    <%= f.select(:timezone, ActiveSupport::TimeZone.us_zones.collect { |p| [ "(GMT" + p.formatted_offset + ") " + p.name, p.name]  }) %>
+  </div>
+<% end %>
+
+<%= form_for(@event) do |f| %>
+  <div class="form-group">
+    <%= f.label :timezone %><br>
+    <%= f.select(:timezone,  @tzlist, { include_blank: true }) %>
   </div>
 <% end %>
